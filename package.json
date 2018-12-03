@@ -1,0 +1,8 @@
+{
+"name": "Activity Bot",
+"version": "0.0.1",
+"description": "Bot To Measure Activity",
+"main": "fun_police.py",
+"author": "Txawey",
+"dependencies": {}
+}

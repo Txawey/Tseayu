@@ -354,11 +354,11 @@ async def ott(ctx):
         for channel in allChannels:
             if channel.category.name in CatNames:
                 testChannels.append(channel)
-            elif channel.name == "hell's-gate":
+            elif channel.id == 406185289485123594:
                 testChannels.append(channel)
-##        await ctx.send("O_O fmeretok faysyänel:")
-##        for channel in testChannels:
-##            await ctx.send("%s" % channel.name)
+        print("O_O fmeretok faytsyänelit:"
+        for channel in testChannels:
+            print("%s" % channel.name)
             
         
         
@@ -374,6 +374,7 @@ async def ott(ctx):
             if member not in seraMembers:
                 idleMembers.append(member)
                 rolesMoved.append(member.roles)
+                await member.edit(roles=[eylanRole])
 ##        for singleMember in testMembers:
 ##            counter = 0
 ##            for channel in testChannels:

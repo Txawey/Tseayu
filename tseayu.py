@@ -15,7 +15,8 @@ import csv
 Tseayu = discord.Client()  # Initialise Client
 tseayu = commands.Bot(command_prefix="?")  # Initialise client bot
 
-versionnumber="2.5.0"
+versionnumber="3.0"
+versionname="\"'on atìtstewnga'\""
 timezone=timedelta(hours=-5)
 learningRoleNames = ["Sngä'iyu","Numeyu","Tsulfätunay","Tsulfätu"]
 modRoleNames = ["Kenongyu","Eyktan","Olo'eyktan"]
@@ -49,12 +50,16 @@ async def on_member_join(member):
                 i = 0
                 for row in savedLines:
                     i += 1
+                    row[0] = str(row[0])
+                    row[1] = int(row[1])
+                    row[2] = int(row[2])
+                    row[3] = int(row[3])
                     if i == len(savedLines):
                         row[1]+=1
-                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0].strftime("%Y-%m-%d"),row[1],row[2],row[3]))
+                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0],row[1],row[2],row[3]))
             else:
                 for row in savedLines:
-                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0].strftime("%Y-%m-%d"),row[1],row[2],row[3]))
+                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0],row[1],row[2],row[3]))
                 joinlogwrite.write("%s,%i,%i,%i\n" % (currentDate.strftime("%Y-%m-%d"),1,0,0))
 
 @tseayu.event
@@ -79,14 +84,18 @@ async def on_member_remove(member):
                 i = 0
                 for row in savedLines:
                     i += 1
+                    row[0] = str(row[0])
+                    row[1] = int(row[1])
+                    row[2] = int(row[2])
+                    row[3] = int(row[3])
                     if i == len(savedLines):
                         row[2]+=1
                         if member.joined_at.date()==currentDate:
                             row[3]+=1
-                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0].strftime("%Y-%m-%d"),row[1],row[2],row[3]))
+                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0],row[1],row[2],row[3]))
             else:
                 for row in savedLines:
-                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0].strftime("%Y-%m-%d"),row[1],row[2],row[3]))
+                    joinlogwrite.write("%s,%i,%i,%i\n" % (row[0],row[1],row[2],row[3]))
                 joinlogwrite.write("%s,%i,%i,%i\n" % (currentDate.strftime("%Y-%m-%d"),0,1,0))
 
 ## Display Join Logs
@@ -153,6 +162,7 @@ async def pefya(ctx):
         Instructions.append('?census: List Stats on Members in All Roles\n')
         Instructions.append('?search <UserID> <RoleType(l,m, or t)> <Date (yyyy-mm-dd or anything else for from member join date)>: Compiles and outputs all messages by the searched member into a .txt file\n')
         Instructions.append("?oeltsattsolea: Automated 'Eylan Migration (Eyktan+ Only)\n")
+        Instructions.append('?joinlogs: Prints the current version of the join logs\n')
 
         ## Compile and Send
         PefyaSivar=''.join(Instructions)
@@ -170,8 +180,8 @@ async def botquit(ctx):
 ## Version
 @tseayu.command()
 async def version(ctx):
-    displayversion=["Version: ", versionnumber]
-    await ctx.send(''.join(displayversion))
+    displayversion=["Version:", versionnumber, versionname]
+    await ctx.send(' '.join(displayversion))
 
 ## Timestamp Test
 @tseayu.command()
